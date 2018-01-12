@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ../partials/head %>
+</head>
+<body class="container">
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+	<main>
+		<div class="jumbotron">
+			<h1>Pupload</h1>
+			<p>Social media for dogs</p>
+		</div>
+		<div>
+			<h2>Variable</h2>
+			<p><%= tagline %></p>
+		</div>
+		<div>
+			<h2>We Rate Dogs</h2>
+
+			<ul>
+    		<% dogs.forEach(function(dog) { %>
+      	<li><%= dog.name %> - <%= dog.rating %></li>
+    		<% }); %>
+			</ul>
+		</div>
+	</main>
+
+	<footer>
+		<% include ../partials/footer %>
+	</footer>
+
+</body>
+</html>
