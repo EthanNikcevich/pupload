@@ -1,50 +1,79 @@
-// load the things we need
-var express = require('express');
+// server.js
+
+// BASE SETUP
+// =============================================================================
+
+// call the packages we need
+var express    = require('express')      // call express
 var bodyParser = require('body-parser')
-var app = express();
+var app        = express()                 // define our app using express
 const MongoClient = require('mongodb').MongoClient
 
-// set the view engine to ejs
+// configure app to use bodyParser()
+// this will let us get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
-app.set('view engine', 'ejs');
+app.set('view engine','ejs');
 
-var router = express.Router();
-// use res.render to load up an ejs view file
+// ROUTES FOR OUR API
+// =============================================================================
+var router = express.Router();              // get an instance of the express Router
 
-// index page
-app.get('/', function(req, res) {
-    var dogs = [
-        { name: 'Woofles', rating: 13 },
-        { name: 'Teddy', rating: 13 },
-        { name: 'Bolt', rating: 11 }
-    ];
-    var tagline = "Not sure what to put here. Probably just delete.";
-
-    res.render('pages/index', {
-        dogs: dogs,
-        tagline: tagline
-    });
-});
-
-// about page
-app.get('/about', function(req, res) {
-	res.render('pages/about');
-});
-
-app.get('/login', function(req, res) {
-	res.render('pages/login');
-});
-
+// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-    db.collection('users').find().toArray((err, result) => {
+    db.collection('contacts').find().toArray((err, result) => {
     if (err) return console.log(err)
     // renders index.ejs
     console.log(result)
-    res.render('pages/login', {users: result})
+    res.render('index.ejs', {contacts: result})
   })
 });
 
-app.post('/login', (req, res) => {
+app.get('/feed/api', function(req, res) {
+    db.collection('contacts').find().toArray((err, result) => {
+	  res.render('feed.ejs', {contacts: result});
+  })
+});
+
+app.get('/signup/api', function(req, res) {
+    db.collection('users').find().toArray((err, result) => {
+	  res.render('signup.ejs', {users: result});
+  })
+});
+
+app.get('/login/api', function(req, res) {
+    db.collection('users').find().toArray((err, result) => {
+	  res.render('login.ejs', {users: result});
+  })
+});
+
+// more routes for our API will happen here
+
+
+// app.post('/users', (req, res) => {
+//   db.collection('users').save(req.body, (err, result) => {
+//     if (err) return console.log(err)
+//     for(var i=0; i<users.length; i++){
+//       if(user==users[i].user && password==users[i].password){
+//         res.redirect('/feed/api')
+//       }
+//     }
+//     console.log('saved to database')
+//     res.redirect('/api')
+//   })
+// })
+
+
+
+app.post('/contacts', (req, res) => {
+  db.collection('contacts').save(req.body, (err, result) => {
+    if (err) return console.log(err)
+
+    console.log('saved to database')
+    res.redirect('/api')
+  })
+})
+
+app.post('/users', (req, res) => {
   db.collection('users').save(req.body, (err, result) => {
     if (err) return console.log(err)
 
@@ -67,3 +96,6 @@ MongoClient.connect('mongodb://malbinson:berkeley@ds119436.mlab.com:19436/tester
     console.log('listening on 3000')
   })
 })
+
+//try router instead of app
+//try in login/signup.ejs instead of server.js
