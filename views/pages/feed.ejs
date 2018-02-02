@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ../partials/head %>
+</head>
+<body>
+
+	<header>
+		<% include ../partials/header %>
+	</header>
+
+  <main>
+    <div class="jumbotron">
+			<h1>Pupload</h1>
+			<p>Social Media for Dogs</p>
+		</div>
+
+	  <ul class="contacts" style="list-style-type: none;">
+      <% for(var i=0; i<contacts.length; i++) {%>
+      	<li class="rating">
+					<span>
+						<img src=<%= contacts[i].url %> alt="dog picture" style="height:300px;">
+					</span>
+          <span><%= contacts[i].name %></span>
+        	<span><%= contacts[i].rating %></span>
+      	</li style="list-style-type: none;">
+      <% } %>
+    </ul>
+
+
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
+
+</body>
+</html>
