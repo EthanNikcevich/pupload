@@ -3,7 +3,7 @@
 <head>
 	<% include ../partials/head %>
 </head>
-<body class="container">
+<body>
 
 	<header>
 		<% include ../partials/header %>
@@ -15,19 +15,42 @@
 
 				<div class="jumbotron">
 					<h1>Pupload</h1>
-					<p>Social media for dogs</p>
+					<p>Log In to your Account</p>
 				</div>
 
 			</div>
-
 		</div>
+
+
+
+		<!-- <ul class="users" style="list-style-type: none;">
+			<% for(var i=0; i<users.length; i++) {%>
+				<li class="signin">
+					<span><%= users[i].user %></span>
+					<span><%= users[i].password %></span>
+				</li style="list-style-type: none;">
+			<% } %>
+		</ul> -->
+		<form>
+	  	<input type="text" placeholder="username" name="user" id="user">
+	  	<input type="text" placeholder="password" name="password" id=password>
+	  	<button onclick= <%= checkUser(document.getElementById('user').value, document.getElementById('password').value)%>  type="submit">Submit</button>
+		</form>
+
+		<%!
+		function checkUser(use, pass){
+		  console.log("YOU MADE PROGRESS")
+		  for(var i=0; i<users.length; i++){
+		    if(use==users[i].user){
+		      console.log("IT WORKS")
+		      res.redirect('/api')
+		    }
+		  }
+		}
+		%>
+
 	</main>
 
-	<form action="/login" method="POST">
-	    <input type="text" placeholder="username" name="user">
-	    <input type="text" placeholder="password" name="password">
-	    <button type="submit">Submit</button>
-	  </form>
 	<footer>
 		<% include ../partials/footer %>
 	</footer>
