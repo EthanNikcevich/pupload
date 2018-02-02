@@ -3,35 +3,45 @@
 <head>
 	<% include ../partials/head %>
 </head>
-<body class="container">
+<body>
 
 	<header>
 		<% include ../partials/header %>
 	</header>
 
-	<main>
-		<div class="jumbotron">
+  <main>
+    <div class="jumbotron">
 			<h1>Pupload</h1>
-			<p>Social media for dogs</p>
+			<p>Social Media for Dogs</p>
 		</div>
-		<div>
-			<h2>Variable</h2>
-			<p><%= tagline %></p>
-		</div>
-		<div>
-			<h2>We Rate Dogs</h2>
 
-			<ul>
-    		<% dogs.forEach(function(dog) { %>
-      	<li><%= dog.name %> - <%= dog.rating %></li>
-    		<% }); %>
-			</ul>
-		</div>
-	</main>
+	  <ul class="contacts" style="list-style-type: none;">
+			<p>My Dogs</p>
 
-	<footer>
-		<% include ../partials/footer %>
-	</footer>
+      	<% for(var i=0; i<contacts.length; i++) {%>
+      		<li class="rating">
+						<span>
+							<img src=<%= contacts[i].url %> alt="dog picture" style="height:100px;">
+						</span>
+          	<span><%= contacts[i].name %></span>
+        		<span><%= contacts[i].rating %></span>
+      		</li style="list-style-type: none;">
+      	<% } %>
+
+    </ul>
+
+    <form action="/contacts" method="POST">
+			<p>Pupload a Dog</p>
+			<input type="url" placeholder="url of dog picture" name="url">
+      <input type="text" placeholder="name" name="name">
+      <input type="text" placeholder="rating" name="rating">
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <footer>
+    <% include ../partials/footer %>
+  </footer>
 
 </body>
 </html>
