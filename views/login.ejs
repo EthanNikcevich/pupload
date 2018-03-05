@@ -10,6 +10,7 @@
 	</header>
 
 	<main>
+
 		<div class="row">
 			<div class="col-sm-8">
 
@@ -21,33 +22,11 @@
 			</div>
 		</div>
 
-
-
-		<!-- <ul class="users" style="list-style-type: none;">
-			<% for(var i=0; i<users.length; i++) {%>
-				<li class="signin">
-					<span><%= users[i].user %></span>
-					<span><%= users[i].password %></span>
-				</li style="list-style-type: none;">
-			<% } %>
-		</ul> -->
-		<form>
+		<form action="/login" method="POST">
 	  	<input type="text" placeholder="username" name="user" id="user">
-	  	<input type="text" placeholder="password" name="password" id=password>
-	  	<button onclick= <%= checkUser(document.getElementById('user').value, document.getElementById('password').value)%>  type="submit">Submit</button>
+	  	<input type="password" placeholder="password" name="password" id=password>
+			<input type="submit" value="Submit">
 		</form>
-
-		<%!
-		function checkUser(use, pass){
-		  console.log("YOU MADE PROGRESS")
-		  for(var i=0; i<users.length; i++){
-		    if(use==users[i].user){
-		      console.log("IT WORKS")
-		      res.redirect('/api')
-		    }
-		  }
-		}
-		%>
 
 	</main>
 
