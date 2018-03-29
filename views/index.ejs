@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<style>
+		body {
+    	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    	font-weight: 350;
+		}
+	</style>
 	<% include ../partials/head %>
 </head>
 <body>
@@ -10,21 +16,29 @@
 	</header>
 
   <main>
+
     <div class="jumbotron">
-			<h1>Pupload</h1>
-			<p>Social Media for Dogs</p>
+			<a href="https://imgur.com/0EFgodT"><img src="https://i.imgur.com/0EFgodT.png" title="source: imgur.com" style="height:100px;"/></a>
 		</div>
 
+		<form action="/contacts" method="POST" style="max-width:1350px; margin:auto">
+			<p style="font-size:150%">Pupload a Dog</p>
+			<input type="url" placeholder="url of dog picture" name="url" style="width:300px"><br>
+      <input type="text" placeholder="dog's name" name="name" style="width:300px"><br>
+      <input type="text" placeholder="caption" name="caption" style="width:300px"><br>
+      <input type="submit" value="Pupload" style="width:300px">
+    </form>
+
 	  <ul class="contacts" style="list-style-type: none;">
-			<p>My Dogs</p>
+			<p style="font-size:150%">My Dogs</p>
 
       	<% for(var i=0; i<contacts.length; i++){ %>
 					<% if(contacts[i].poster==profileVar){ %>
       			<li class="post">
 							<span>
-								<img src=<%= contacts[i].url %> alt="dog picture" style="height:100px;">
+								<img src=<%= contacts[i].url %> alt="dog picture" style="height:200px;">
 							</span>
-							<li class="text">
+							<li class="text" style="font-size:120%">
           			<span><%= contacts[i].name %>-</span>
         				<span><%= contacts[i].caption %></span>
 							</li>
@@ -33,13 +47,6 @@
 				<% } %>
     </ul>
 
-    <form action="/contacts" method="POST">
-			<p>Pupload a Dog</p>
-			<input type="url" placeholder="url of dog picture" name="url">
-      <input type="text" placeholder="dog's name" name="name">
-      <input type="text" placeholder="caption" name="caption">
-      <button type="submit">Submit</button>
-    </form>
   </main>
 
   <footer>
