@@ -1,8 +1,3 @@
-// server.js
-
-// BASE SETUP
-// =============================================================================
-
 // call the packages we need
 var express    = require('express')      // call express
 var bodyParser = require('body-parser')
@@ -31,10 +26,16 @@ router.get('/', function(req, res) {
   }else{console.log("not logged in")}
 });
 
+app.get('/search/api', function(req, res) {
+  db.collection('contacts').find().toArray((err, result) => {
+	 res.render('search.ejs', {contacts: result, foundDogs: ""});
+  })
+});
+
 app.get('/feed/api', function(req, res) {
   if(account==true){
     db.collection('contacts').find().toArray((err, result) => {
-	     res.render('feed.ejs', {contacts: result});
+	   res.render('feed.ejs', {contacts: result});
     })
   }else{console.log("not logged in")}
 });
@@ -54,6 +55,9 @@ app.get('/login/api', function(req, res) {
 app.get('/logout/api', function(req, res) {
   account=false;
   profile="";
+  db.collection('users').find().toArray((err, result) => {
+    res.render('login.ejs', {users: result});
+  })
 });
 
 // more routes for our API will happen here
@@ -68,8 +72,6 @@ app.post('/login', (req, res) => {
     if(!result.length){
       console.log("User not found")
     }else{
-      console.log("$$$")
-      console.log(result);
       account=true
       profile=userName
       res.redirect('/api')
@@ -78,12 +80,25 @@ app.post('/login', (req, res) => {
   })
 })
 
+app.post('/searchDog', (req, res) => {
+
+  var dog = req.body.name
+
+  db.collection('contacts').find({name:dog}).toArray((err, result) => {
+    if(err) {console.log(err)}
+    if(!result.length){
+      console.log("Dog not found")
+    }else{
+      res.render('search.ejs', {foundDogs: result})
+    }
+  })
+})
 
 app.post('/feed', function (req, res) {
 
   var Name = req.body.name
   db.collection('contacts').update({name:Name},{$push: {comments: {post:profile+': '+ req.body.comment+'   '+req.body.rating+'/10'}}})
-  res.redirect('/api')
+  res.redirect('/feed/api')
 })
 
 app.post('/contacts', function (req, res) {
@@ -94,6 +109,7 @@ app.post('/contacts', function (req, res) {
   db.collection('contacts').save({poster:profile, url:uRl, name:dogName, caption:capt})
   res.redirect('/api')
 })
+
 
 app.post('/users', (req, res) => {
   db.collection('users').save(req.body, (err, result) => {
