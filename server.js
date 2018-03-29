@@ -16,14 +16,14 @@ var router = express.Router();              // get an instance of the express Ro
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-  if(account==true){
+//   if(account==true){
     db.collection('contacts').find().toArray((err, result) => {
       if (err) return console.log(err)
     // renders index.ejs
       console.log(result)
       res.render('index.ejs', {contacts: result, profileVar: profile})
     })
-  }else{console.log("not logged in")}
+//   }else{console.log("not logged in")}
 });
 
 app.get('/search/api', function(req, res) {
