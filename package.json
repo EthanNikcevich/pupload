@@ -1,11 +1,25 @@
 {
-  "name": "node-ejs",
+  "name": "node-api",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "ejs": "^1.0.0",
-    "express": "^4.6.1",
-    "express-ejs-layouts": "^1.1.0",
-    "mongodb": "^3.0.1"
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.34"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11"
+  },
+  "scripts": {
+    "dev": "nodemon server.js",
+    "web": "node server.js"
+  },
+    "author": "ethan-nikcevich",
+    "engines": {
+      "node": "6.11.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@heroku.com:murmuring-wildwood.git"
   }
 }
