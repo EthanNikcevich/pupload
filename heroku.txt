@@ -1,0 +1,4 @@
+heroku	https://git.heroku.com/murmuring-wildwood-64723.git (fetch)
+heroku	https://git.heroku.com/murmuring-wildwood-64723.git (push)
+pupload	https://git.heroku.com/enigmatic-inlet-19712.git (fetch)
+pupload	https://git.heroku.com/enigmatic-inlet-19712.git (push)
