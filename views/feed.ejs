@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="specimen_files/specimen_stylesheet.css" type="text/css" charset="utf-8" />
+	<link rel="stylesheet" href="stylesheet.css" type="text/css" charset="utf-8" />
+	<style type="text/css">
+		body {
+			font-family: 'puppybelliesmedium', "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			font-weight: 350;
+		}
+	</style>
 	<% include ../partials/head %>
 </head>
 <body>
@@ -11,14 +21,13 @@
 
   <main>
     <div class="jumbotron">
-			<h1>Pupload</h1>
-			<p>Social Media for Dogs</p>
+			<a href="https://imgur.com/0EFgodT"><img src="https://i.imgur.com/0EFgodT.png" title="source: imgur.com" style="height:100px;"/></a>
 		</div>
 
 	  <ul class="contacts" style="list-style-type: none;">
     <% for(var i=0; i<contacts.length; i++) {%>
     	<li class="post">
-				<li class="posterInfo">
+				<li class="posterInfo" style="font-size:150%" >
 					<span><%= contacts[i].poster %>:</span>
 					<span>This is <%= contacts[i].name %></span>
 				</li>
@@ -40,12 +49,12 @@
 				</li>
 				<form action="/feed" method="post">
 			  	<div>
-			    	<h3>Rate <%= contacts[i].name %></h3>
+			    	<h3 style="font-size:150%">Rate <%= contacts[i].name %></h3>
 						<input type="hidden" name="name" id="id" value=<%= contacts[i].name %>>
 						<input type="hidden" name="rateTest" id="rateTest" value="rateTest">
-			    	<input type="number" name="rating" id="rtng" placeholder="Rating" ><br>
-			    	<textarea type="text" name="comment" id="cmnt" placeholder="Comment" style="width:152px"></textarea><br>
-			    	<input type="submit" value="Submit" style="width:152px">
+			    	<input type="number" name="rating" id="rtng" placeholder="Rating" style="width:300px"><br>
+			    	<textarea type="text" name="comment" id="cmnt" placeholder="Comment" style="width:300px"></textarea><br>
+			    	<input type="submit" value="Pupload" style="width:300px">
 			  	</div>
 				</form>
     	</li style="list-style-type: none;">
